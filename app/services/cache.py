@@ -1,36 +1,3 @@
-# import redis
-# import json
-
-# class Cache:
-#     def __init__(self, host='localhost', port=6379):
-#         self.client = redis.Redis(host=host, port=port)
-
-#     def get(self, key):
-#         value = self.client.get(key)
-#         if value:
-#             return json.loads(value)
-#         return None
-    
-#     def set(self, key, value):
-#         value = json.dumps(value)
-#         self.client.set(key, value)
-
-#     def exists(self, key):
-#         return self.client.exists(key)
-    
-#     def update(self, key, value):
-#         if self.exists(key):
-#             value = json.dumps(value)
-#             self.set(key, value)
-#             return True
-#         return False
-
-#     def delete(self, key):
-#         if self.exists(key):
-#             self.client.delete(key)
-#             return True
-#         return False
-
 import redis
 import json
 from typing import Optional, Any
