@@ -1,0 +1,77 @@
+openapi: 3.0.0
+info:
+  title: Web Scraping API
+  description: API for scraping data from websites.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+paths:
+  /scrape:
+    post:
+      summary: Start a scraping job
+      description: Initiates a scraping job to collect data from the specified number of pages.
+      operationId: startScrapingJob
+      tags:
+        - Scraping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                max_pages:
+                  type: integer
+                  example: 5
+                proxy:
+                  type: string
+                  example: proxy
+        required: true
+      responses:
+        '200':
+          description: Successful response indicating the scraping job has started.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Scraping completed."
+        '400':
+          description: Bad request, possibly due to invalid input.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Invalid request payload."
+        '401':
+          description: Unauthorized access, possibly due to invalid or missing authorization token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Unauthorized. Please provide a valid token."
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "An unexpected error occurred."
+      security:
+        - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
